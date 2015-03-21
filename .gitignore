@@ -1,0 +1,8 @@
+*.csproj
+*.pidb
+*.sln
+*.suo
+
+Temp
+build
+Library
