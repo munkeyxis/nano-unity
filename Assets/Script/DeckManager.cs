@@ -7,8 +7,8 @@ public class DeckManager : MonoBehaviour, IGameManager {
     public GameObject DeckCardRow;
     private List<GameObject> _deckRowList;
     private Dictionary<Card, int> _deckDictionary;
-    private int _startingCard1Amount = 2;
-    private int _startingCard2Amount = 8;
+    private int _startingCard1Amount = 8;
+    private int _startingCard2Amount = 2;
 
     public void Startup() {
         Debug.Log("Deck manager starting...");
@@ -80,5 +80,19 @@ public class DeckManager : MonoBehaviour, IGameManager {
                 _deckRowList.Add(cardRow);
             }
         }
+    }
+
+    public List<Card> GetDeckCardList() {
+        List<Card> deckList = new List<Card>();
+
+        foreach (KeyValuePair<Card, int> card in _deckDictionary) {
+            int i = 0;
+            while (i < card.Value) {
+                deckList.Add(card.Key);
+                i++;
+            }
+        }
+
+        return deckList;
     }
 }
