@@ -15,7 +15,6 @@ public class CombatManager : MonoBehaviour, IGameManager {
         Debug.Log("Combat manager starting...");
 
         CombatUIGroup.SetActive(false);
-        
 
         status = ManagerStatus.Started;
     }
