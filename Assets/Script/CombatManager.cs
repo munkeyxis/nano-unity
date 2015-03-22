@@ -44,9 +44,14 @@ public class CombatManager : MonoBehaviour, IGameManager {
         CombatUIGroup.SetActive(true);
     }
 
+    public List<Card> GetHandList() {
+        return _handList;
+    }
+
     private void DrawCard() {
         int randomNumber = Random.Range(0, _deckList.Count);
         _handList.Add(_deckList[randomNumber]);
         _deckList.RemoveAt(randomNumber);
+        CombatUIGroup.GetComponent<CombatUIController>().DisplayHand();
     }
 }
