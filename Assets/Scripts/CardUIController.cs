@@ -8,4 +8,8 @@ public class CardUIController : MonoBehaviour {
         _card = card;
         transform.GetChild(0).GetComponent<TextMesh>().text = card.Name;
     }
+
+    public void UseCard() {
+
+    }
 }
