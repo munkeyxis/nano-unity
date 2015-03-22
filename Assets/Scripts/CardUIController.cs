@@ -10,6 +10,6 @@ public class CardUIController : MonoBehaviour {
     }
 
     public void UseCard() {
-
+        Managers.CombatManager.UseCard(_card);
     }
 }

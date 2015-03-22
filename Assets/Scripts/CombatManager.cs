@@ -48,10 +48,32 @@ public class CombatManager : MonoBehaviour, IGameManager {
         return _handList;
     }
 
+    public void UseCard(Card card) {
+        if (_handList.Contains(card)) {
+            _handList.Remove(card);
+            _discardList.Add(card);
+            DrawCard();
+        }
+        else {
+            Debug.Log("Cannot use card " + card.Name + "! It is not in your hand!");
+        }
+    }
+
     private void DrawCard() {
+        if (_deckList.Count == 0) {
+            RefillDeck();
+        }
+
         int randomNumber = Random.Range(0, _deckList.Count);
         _handList.Add(_deckList[randomNumber]);
         _deckList.RemoveAt(randomNumber);
         CombatUIGroup.GetComponent<CombatUIController>().DisplayHand();
+    }
+
+    private void RefillDeck() {
+        foreach (Card card in _discardList) {
+            _deckList.Add(card);
+        }
+        _discardList.Clear();
     }
 }
