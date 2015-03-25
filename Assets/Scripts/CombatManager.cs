@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public class CombatManager : MonoBehaviour, IGameManager {
     public ManagerStatus status { get; private set; }
     public GameObject CombatUIGroup;
+    private CombatUIController _combatUIController;
     private Enemy _enemy;
     private List<Card> _deckList;
     private List<Card> _handList;
@@ -20,8 +21,9 @@ public class CombatManager : MonoBehaviour, IGameManager {
     }
 
     public void StartCombat() {
+        _combatUIController = CombatUIGroup.GetComponent<CombatUIController>();
         _enemy = new Enemy("Test Dummy", 10, "testDummy");
-        CombatUIGroup.GetComponent<CombatUIController>().DisplayEnemyInformation(_enemy);
+        _combatUIController.DisplayEnemyInformation(_enemy);
 
         _deckList = Managers.Deck.GetDeckCardList();
         _handList = new List<Card>();
@@ -41,6 +43,7 @@ public class CombatManager : MonoBehaviour, IGameManager {
             Debug.Log(handCard.Name);
         }
 
+        _combatUIController.DisplayCombatText("You encounter a " + _enemy.Name + "!");
         CombatUIGroup.SetActive(true);
     }
 
@@ -57,6 +60,15 @@ public class CombatManager : MonoBehaviour, IGameManager {
         else {
             Debug.Log("Cannot use card " + card.Name + "! It is not in your hand!");
         }
+
+        string combatText = "You use " + card.Name + ". \n" +
+            _enemy.Name + " takes " + card.getPowerValue() + " damage!";
+
+        _combatUIController.DisplayCombatText(combatText);
+
+        _enemy.CurrentHP -= card.getPowerValue();
+        _combatUIController.DisplayEnemyInformation(_enemy);
+        CheckForDeath();
     }
 
     private void DrawCard() {
@@ -67,7 +79,7 @@ public class CombatManager : MonoBehaviour, IGameManager {
         int randomNumber = Random.Range(0, _deckList.Count);
         _handList.Add(_deckList[randomNumber]);
         _deckList.RemoveAt(randomNumber);
-        CombatUIGroup.GetComponent<CombatUIController>().DisplayHand();
+        _combatUIController.DisplayHand();
     }
 
     private void RefillDeck() {
@@ -75,5 +87,12 @@ public class CombatManager : MonoBehaviour, IGameManager {
             _deckList.Add(card);
         }
         _discardList.Clear();
+    }
+
+    private void CheckForDeath() {
+        if (_enemy.CurrentHP <= 0) {
+            CombatUIGroup.SetActive(false);
+            Managers.Inventory.AddRandomItemToInventory();
+        }
     }
 }

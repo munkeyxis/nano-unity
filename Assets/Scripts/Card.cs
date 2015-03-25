@@ -9,4 +9,8 @@ public class Card : Item {
         Name = name;
         _powerValue = powerValue;
     }
+
+    public int getPowerValue() {
+        return _powerValue;
+    }
 }

@@ -7,6 +7,7 @@ public class CombatUIController : MonoBehaviour {
     public TextMesh EnemyMaxHP;
     public TextMesh EnemyCurrentHP;
     public SpriteRenderer EnemySprite;
+    public TextMesh CombatTextMesh;
     public GameObject HandGroup;
     public GameObject CardPrefab;
     private List<GameObject> _cardPrefabList = new List<GameObject>();
@@ -16,6 +17,10 @@ public class CombatUIController : MonoBehaviour {
         EnemyMaxHP.text = "/" + enemy.MaxHP.ToString();
         EnemyCurrentHP.text = enemy.CurrentHP.ToString();
         EnemySprite.sprite = Resources.Load<Sprite>("Enemies/testDummy");
+    }
+
+    public void DisplayCombatText(string combatText) {
+        CombatTextMesh.text = combatText;
     }
 
     public void DisplayHand() {
