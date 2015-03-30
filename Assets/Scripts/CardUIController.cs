@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class CardUIController : MonoBehaviour {
+public class CardUIController : MonoBehaviour, DroppableObject {
     private Card _card;
 
     public void AssignCard(Card card) {
@@ -9,7 +9,7 @@ public class CardUIController : MonoBehaviour {
         transform.GetChild(0).GetComponent<TextMesh>().text = card.Name;
     }
 
-    public void UseCard() {
+    public void UseObject() {
         Managers.CombatManager.UseCard(_card);
     }
 }

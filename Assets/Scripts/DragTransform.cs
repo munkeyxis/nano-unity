@@ -3,7 +3,7 @@ using System.Collections;
 
 public class DragTransform : MonoBehaviour {
     private bool _dragging = false;
-    private bool _inPlayArea = false;
+    private bool _inDropArea = false;
     private Vector3 _originalPosition;
 
     void Start() {
@@ -17,7 +17,7 @@ public class DragTransform : MonoBehaviour {
     void OnMouseUp() {
         _dragging = false;
 
-        if (!_inPlayArea) {
+        if (!_inDropArea) {
             transform.localPosition = _originalPosition;
         }
     }
@@ -26,21 +26,20 @@ public class DragTransform : MonoBehaviour {
         if (_dragging) {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             transform.position = new Vector3(ray.origin.x, ray.origin.y, transform.position.z);
-
         }
     }
 
     void OnTriggerEnter2D() {
-        _inPlayArea = true;
+        _inDropArea = true;
     }
 
     void OnTriggerStay2D() {
         if (!_dragging) {
-            GetComponent<CardUIController>().UseCard();
+            GetComponent<DroppableObject>().UseObject();
         }
     }
 
     void OnTriggerExit2D() {
-        _inPlayArea = false;
+        _inDropArea = false;
     }
 }
