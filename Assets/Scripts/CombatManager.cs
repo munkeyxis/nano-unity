@@ -4,8 +4,7 @@ using System.Collections.Generic;
 
 public class CombatManager : MonoBehaviour, IGameManager {
     public ManagerStatus status { get; private set; }
-    public GameObject CombatUIPrefab;
-    private GameObject CombatUIGroup;
+    public GameObject CombatUIGroup;
     private CombatUIController _combatUIController;
     private Enemy _enemy;
     private List<Card> _deckList;
@@ -15,7 +14,7 @@ public class CombatManager : MonoBehaviour, IGameManager {
 
     public void Startup() {
         Debug.Log("Combat manager starting...");
-        CombatUIGroup = Instantiate(CombatUIPrefab);
+        CombatUIGroup = Instantiate(CombatUIGroup);
         CombatUIGroup.SetActive(false);
 
         status = ManagerStatus.Started;
