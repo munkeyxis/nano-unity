@@ -9,7 +9,6 @@ public class Explore : MonoBehaviour {
         // activate new Event
 
         // TODO: remove after testing has been completed
-        // Managers.Inventory.AddRandomItemToInventory();
         Managers.CombatManager.StartCombat();
     }
 }
