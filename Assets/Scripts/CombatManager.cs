@@ -69,6 +69,7 @@ public class CombatManager : MonoBehaviour, IGameManager {
         _enemy.CurrentHP -= card.getPowerValue();
         _combatUIController.DisplayEnemyInformation(_enemy);
         CheckForDeath();
+        _enemy.Attack();
     }
 
     private void DrawCard() {

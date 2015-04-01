@@ -29,4 +29,16 @@ public class PlayerManager : MonoBehaviour, IGameManager {
         CurrentHealthTextMesh.text = Health.ToString();
         Debug.Log("Health: " + Health + "/" + MaxHealth);
     }
+
+    public void ReduceHealth(int value) {
+        Health -= value;
+        if (Health > MaxHealth) {
+            Health = MaxHealth;
+        }
+        else if (Health < 0) {
+            Health = 0;
+        }
+        CurrentHealthTextMesh.text = Health.ToString();
+        Debug.Log("Health: " + Health + "/" + MaxHealth);
+    }
 }

@@ -10,4 +10,8 @@
         CurrentHP = MaxHP;
         SpriteName = spriteName;
     }
+
+    public void Attack() {
+        Managers.Player.ReduceHealth(5);
+    }
 }
