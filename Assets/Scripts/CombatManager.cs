@@ -12,10 +12,14 @@ public class CombatManager : MonoBehaviour, IGameManager {
     private List<Card> _discardList;
     private int _startingHandSize = 4;
 
+    private bool combatActive;
+    private float enemyAttackTimer;
+
     public void Startup() {
         Debug.Log("Combat manager starting...");
         CombatUIGroup = Instantiate(CombatUIGroup);
         CombatUIGroup.SetActive(false);
+        combatActive = false;
 
         status = ManagerStatus.Started;
     }
@@ -45,6 +49,19 @@ public class CombatManager : MonoBehaviour, IGameManager {
 
         _combatUIController.DisplayCombatText("You encounter a " + _enemy.Name + "!");
         CombatUIGroup.SetActive(true);
+
+        combatActive = true;
+        enemyAttackTimer = 0;
+    }
+
+    void Update() {
+        if (combatActive) {
+            if (enemyAttackTimer >= _enemy.AttackSpeed) {
+                enemyAttackTimer = 0;
+                _enemy.Attack();
+            }
+            enemyAttackTimer += 1 * Time.deltaTime;
+        }
     }
 
     public List<Card> GetHandList() {
@@ -69,7 +86,6 @@ public class CombatManager : MonoBehaviour, IGameManager {
         _enemy.CurrentHP -= card.getPowerValue();
         _combatUIController.DisplayEnemyInformation(_enemy);
         CheckForDeath();
-        _enemy.Attack();
     }
 
     private void DrawCard() {
@@ -93,6 +109,7 @@ public class CombatManager : MonoBehaviour, IGameManager {
     private void CheckForDeath() {
         if (_enemy.CurrentHP <= 0) {
             CombatUIGroup.SetActive(false);
+            combatActive = false;
             Managers.Inventory.AddRandomItemToInventory();
         }
     }
