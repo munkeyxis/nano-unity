@@ -61,6 +61,7 @@ public class CombatManager : MonoBehaviour, IGameManager {
                 _enemy.Attack();
             }
             enemyAttackTimer += 1 * Time.deltaTime;
+            _combatUIController.UpdateAttackTimerBar(enemyAttackTimer, _enemy.AttackSpeed);
         }
     }
 

@@ -10,6 +10,8 @@ public class CombatUIController : MonoBehaviour {
     public TextMesh CombatTextMesh;
     public GameObject HandGroup;
     public GameObject CardPrefab;
+    public GameObject EnemyAttackTimerBar;
+    private float _maxTimerBarScaleX = 10;
     private List<GameObject> _cardPrefabList = new List<GameObject>();
 
     public void DisplayEnemyInformation(Enemy enemy) {
@@ -41,5 +43,10 @@ public class CombatUIController : MonoBehaviour {
             cardPrefab.GetComponent<CardUIController>().AssignCard(card);
             _cardPrefabList.Add(cardPrefab);
         }
+    }
+
+    public void UpdateAttackTimerBar(float timer, float enemySpeed) {
+        float percent = timer / enemySpeed;
+        EnemyAttackTimerBar.transform.localScale = new Vector3(percent * 10, 1, 1);
     }
 }
