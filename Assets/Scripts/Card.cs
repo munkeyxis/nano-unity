@@ -4,12 +4,14 @@ using System.Collections;
 public class Card : Item {
     public string Name { get; private set; }
     private int _powerValue;
-    public Color Color { get; private set; }
+    public Color CardColor { get; private set; }
+    public Color ComboColor { get; private set; }
 
-    public Card(string name, int powerValue, Color color) {
+    public Card(string name, int powerValue, Color cardColor, Color comboColor) {
         Name = name;
         _powerValue = powerValue;
-        Color = color;
+        CardColor = cardColor;
+        ComboColor = comboColor;
     }
 
     public int getPowerValue() {

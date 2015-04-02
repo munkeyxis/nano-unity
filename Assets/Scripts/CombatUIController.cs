@@ -47,6 +47,6 @@ public class CombatUIController : MonoBehaviour {
 
     public void UpdateAttackTimerBar(float timer, float enemySpeed) {
         float percent = timer / enemySpeed;
-        EnemyAttackTimerBar.transform.localScale = new Vector3(percent * 10, 1, 1);
+        EnemyAttackTimerBar.transform.localScale = new Vector3(percent * _maxTimerBarScaleX, 1, 1);
     }
 }
