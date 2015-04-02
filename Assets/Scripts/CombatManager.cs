@@ -15,6 +15,11 @@ public class CombatManager : MonoBehaviour, IGameManager {
     private bool combatActive;
     private float enemyAttackTimer;
 
+    private Card _previousCard;
+    private int _comboCounter;
+
+    private Card _comboResetCard = new Card("default", 0, Color.gray, Color.gray);
+
     public void Startup() {
         Debug.Log("Combat manager starting...");
         CombatUIGroup = Instantiate(CombatUIGroup);
@@ -52,6 +57,10 @@ public class CombatManager : MonoBehaviour, IGameManager {
 
         combatActive = true;
         enemyAttackTimer = 0;
+
+        _comboCounter = 0;
+        _previousCard = _comboResetCard;
+        _combatUIController.UpdateComboDisplay(_comboCounter);
     }
 
     void Update() {
@@ -79,6 +88,9 @@ public class CombatManager : MonoBehaviour, IGameManager {
             Debug.Log("Cannot use card " + card.Name + "! It is not in your hand!");
         }
 
+        HandleCombo(card);
+        _combatUIController.UpdateComboDisplay(_comboCounter);
+
         string combatText = "You use " + card.Name + ". \n" +
             _enemy.Name + " takes " + card.getPowerValue() + " damage!";
 
@@ -87,6 +99,17 @@ public class CombatManager : MonoBehaviour, IGameManager {
         _enemy.CurrentHP -= card.getPowerValue();
         _combatUIController.DisplayEnemyInformation(_enemy);
         CheckForDeath();
+        _previousCard = card;
+    }
+
+    private void HandleCombo(Card card) {
+        if (_previousCard.ComboColor == card.CardColor) {
+            _comboCounter++;
+        }
+        else {
+            _comboCounter = 0;
+            _previousCard = _comboResetCard;
+        }
     }
 
     private void DrawCard() {

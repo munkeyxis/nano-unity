@@ -11,6 +11,7 @@ public class CombatUIController : MonoBehaviour {
     public GameObject HandGroup;
     public GameObject CardPrefab;
     public GameObject EnemyAttackTimerBar;
+    public TextMesh ComboCounterTextMesh;
     private float _maxTimerBarScaleX = 10;
     private List<GameObject> _cardPrefabList = new List<GameObject>();
 
@@ -23,6 +24,10 @@ public class CombatUIController : MonoBehaviour {
 
     public void DisplayCombatText(string combatText) {
         CombatTextMesh.text = combatText;
+    }
+
+    public void UpdateComboDisplay(int comboAmount) {
+        ComboCounterTextMesh.text = comboAmount.ToString();
     }
 
     public void DisplayHand() {
