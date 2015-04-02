@@ -68,6 +68,8 @@ public class CombatManager : MonoBehaviour, IGameManager {
             if (enemyAttackTimer >= _enemy.AttackSpeed) {
                 enemyAttackTimer = 0;
                 _enemy.Attack();
+                _comboCounter = 0;
+                _combatUIController.UpdateComboDisplay(_comboCounter);
             }
             enemyAttackTimer += 1 * Time.deltaTime;
             _combatUIController.UpdateAttackTimerBar(enemyAttackTimer, _enemy.AttackSpeed);
