@@ -31,7 +31,7 @@ public class CombatManager : MonoBehaviour, IGameManager {
 
     public void StartCombat() {
         _combatUIController = CombatUIGroup.GetComponent<CombatUIController>();
-        _enemy = new Enemy("Test Dummy", 10, "testDummy");
+        _enemy = new Enemy("Test Dummy", 30, "testDummy");
         _combatUIController.DisplayEnemyInformation(_enemy);
 
         _deckList = Managers.Deck.GetDeckCardList();
