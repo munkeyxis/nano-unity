@@ -7,8 +7,9 @@ public class DeckManager : MonoBehaviour, IGameManager {
     public GameObject DeckCardRow;
     private List<GameObject> _deckRowList;
     private Dictionary<Card, int> _deckDictionary;
-    private int _startingCard1Amount = 8;
+    private int _startingCard1Amount = 6;
     private int _startingCard2Amount = 2;
+    private int _startingCard3Amount = 2;
 
     public void Startup() {
         Debug.Log("Deck manager starting...");
@@ -24,6 +25,11 @@ public class DeckManager : MonoBehaviour, IGameManager {
         Card card2 = Managers.Items.ItemList[3] as Card;
         while (GetCardCountInDeck(card2) < _startingCard2Amount) {
             AddCardToDeck(card2);
+        }
+
+        Card card3 = Managers.Items.ItemList[4] as Card;
+        while (GetCardCountInDeck(card3) < _startingCard3Amount) {
+            AddCardToDeck(card3);
         }
 
         status = ManagerStatus.Started;

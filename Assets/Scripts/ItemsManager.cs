@@ -16,10 +16,10 @@ public class ItemsManager : MonoBehaviour, IGameManager {
 
         ItemList.Add(HealthPotion);
         ItemList.Add(Meat);
-        ItemList.Add(new Card("Jab Card", 1, Color.yellow, Color.red));
-        ItemList.Add(new Card("Punch Card", 2, Color.red, Color.yellow));
-        ItemList.Add(new Card("Kick Card", 3, Color.magenta, Color.blue));
-        ItemList.Add(new Card("Stab Card", 4, Color.blue, Color.yellow));
+        ItemList.Add(new Card("Jab Card", 1, Color.yellow, Color.red, Color.magenta));
+        ItemList.Add(new Card("Punch Card", 2, Color.red, Color.yellow, Color.magenta));
+        ItemList.Add(new Card("Kick Card", 3, Color.magenta, Color.blue, Color.grey));
+        ItemList.Add(new Card("Stab Card", 4, Color.blue, Color.yellow, Color.grey));
 
         status = ManagerStatus.Started;
     }

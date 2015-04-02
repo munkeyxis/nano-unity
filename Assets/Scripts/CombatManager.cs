@@ -18,7 +18,7 @@ public class CombatManager : MonoBehaviour, IGameManager {
     private Card _previousCard;
     private int _comboCounter;
 
-    private Card _comboResetCard = new Card("default", 0, Color.gray, Color.gray);
+    private Card _comboResetCard = new Card("default", 0, Color.gray, Color.gray, Color.gray);
 
     public void Startup() {
         Debug.Log("Combat manager starting...");
@@ -107,9 +107,16 @@ public class CombatManager : MonoBehaviour, IGameManager {
             _comboCounter++;
         }
         else {
+            if (_previousCard.FinisherColor == card.CardColor) {
+                HandleFinisher();
+            }
             _comboCounter = 0;
             _previousCard = _comboResetCard;
         }
+    }
+
+    private void HandleFinisher() {
+        _enemy.CurrentHP -= _comboCounter;
     }
 
     private void DrawCard() {
